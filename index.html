@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚡ MALIK AI Video Generator ⚡</title>
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top, #0d0d2b, #09091a);
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+.container {
+  max-width: 420px;
+  margin: 60px auto;
+  background: #11152b;
+  border-radius: 20px;
+  box-shadow: 0 0 15px #00f0ff55;
+  padding: 25px;
+}
+h1 {
+  color: #ffcc00;
+  font-size: 1.6em;
+}
+input {
+  width: 90%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  margin-top: 15px;
+  font-size: 1em;
+}
+button {
+  background: linear-gradient(90deg,#ff007f,#00f0ff);
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 15px;
+}
+button:hover {
+  opacity: 0.85;
+}
+.links a {
+  display: inline-block;
+  margin: 10px;
+  background: #222;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #00f0ff;
+  text-decoration: none;
+  font-weight: bold;
+}
+footer {
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: #bbb;
+}
+#result {
+  margin-top: 20px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>⚡ MALIK AI Video Generator ⚡</h1>
+  <input type="text" id="prompt" placeholder="Enter your video idea...">
+  <br>
+  <button onclick="generateVideo()">🎨 Generate Video</button>
+  <div class="links">
+    <a href="https://t.me/Netwarrior804" target="_blank">📢 Join Telegram</a>
+    <a href="https://t.me/LegendUnknownHacker92" target="_blank">📢 Join Telegram</a>
+  </div>
+  <div id="result"></div>
+</div>
+
+<footer>⭐ Powered by MALIK — 2025</footer>
+
+<script>
+async function generateVideo() {
+  const prompt = document.getElementById("prompt").value.trim();
+  const resultDiv = document.getElementById("result");
+  if (!prompt) return alert("Please enter a prompt!");
+
+  resultDiv.innerHTML = "⏳ Generating video, please wait...";
+
+  const proxies = [
+    "https://api.codetabs.com/v1/proxy/?quest=",
+    "https://api.allorigins.win/raw?url="
+  ];
+
+  const apiURL = `https://yabes-api.pages.dev/api/ai/video/v1?prompt=${encodeURIComponent(prompt)}`;
+
+  for (let proxy of proxies) {
+    try {
+      const response = await fetch(proxy + apiURL);
+      const text = await response.text();
+
+      // Try parsing JSON if possible
+      let data;
+      try { data = JSON.parse(text); } catch { data = null; }
+
+      // Case 1: JSON with video
+      if (data && data.video) {
+        resultDiv.innerHTML = `<video controls width="100%" src="${data.video}"></video>`;
+        return;
+      }
+
+      // Case 2: Direct video link
+      if (text.includes("http") && text.includes(".mp4")) {
+        const videoURL = text.match(/https?:\/\/[^\s"]+\.mp4/)[0];
+        resultDiv.innerHTML = `<video controls width="100%" src="${videoURL}"></video>`;
+        return;
+      }
+
+    } catch (err) {
+      console.log(`Proxy failed: ${proxy}`, err);
+    }
+  }
+
+  resultDiv.innerHTML = `⚠️ Fetching error. Please reload and try again.`;
+}
+</script>
+<script type='text/javascript' src='//pl26635370.revenuecpmgate.com/0d/d6/68/0dd66892ae1350e1c2ac63bd9e54e111.js'></script></body>
+</html>
